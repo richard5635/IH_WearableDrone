@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StageController : MonoBehaviour {
 
-	const int StageTipSize = 64;
+	const int StageTipSize = 32;
 
 	int currentTipIndex;
 
