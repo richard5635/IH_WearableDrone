@@ -35,6 +35,11 @@ namespace PaddleRun
         private int score;
         //private bool Invincible;
 
+        void Awake()
+        {
+            Application.targetFrameRate = 60;
+        }
+
         void Start()
         {
             gameOver = false;

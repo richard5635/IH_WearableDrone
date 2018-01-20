@@ -8,13 +8,13 @@ public class SpeedBoost : MonoBehaviour {
 	int SpeedBooster;
 	float timer;
 	public float dropTime;
-	private float SpeedDrop = 0.03f;
+	public float SpeedDrop = 0.002f;
 
 	// Use this for initialization
 	void Start () {
 		SpeedBooster = 0;
 		StartCoroutine(NaturalSpeedDrop());
-		dropTime = 1.0f;
+		dropTime = 2.0f;
 	}
 	
 	// Update is called once per frame

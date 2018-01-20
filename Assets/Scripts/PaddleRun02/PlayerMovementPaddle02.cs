@@ -30,6 +30,7 @@ public class PlayerMovementPaddle02 : MonoBehaviour
 
     public float fireRate;
     private float nextFire;
+    public bool lockMovement = false;
 
     // Use this for initialization
     void Awake()
@@ -54,6 +55,8 @@ public class PlayerMovementPaddle02 : MonoBehaviour
         
     }
 
+    
+
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -61,7 +64,10 @@ public class PlayerMovementPaddle02 : MonoBehaviour
 
         Vector3 movement = new Vector3(0, -moveHorizontal * 0.5f, moveHorizontal);
 
-        GetComponent<Rigidbody>().angularVelocity = -movement * 5;
+        if(!lockMovement)
+        {
+            GetComponent<Rigidbody>().angularVelocity = -movement * 5;
+        }
 
         transform.eulerAngles = new Vector3(
             0,
@@ -111,8 +117,18 @@ public class PlayerMovementPaddle02 : MonoBehaviour
         {
             //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
             UpdateSpeed(0.02f);
+            speedBoost.SpeedDrop += 0.001f;
         }
 
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "River")
+        {
+            //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
+            speedBoost.SpeedDrop -= 0.001f;
+        }
     }
 
 }
