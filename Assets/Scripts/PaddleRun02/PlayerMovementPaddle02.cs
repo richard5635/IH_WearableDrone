@@ -62,19 +62,22 @@ public class PlayerMovementPaddle02 : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(0, -moveHorizontal * 0.5f, moveHorizontal);
+        
+
+        Vector3 movement = new Vector3(moveVertical * -1, -moveHorizontal * 0.5f, moveHorizontal);
 
         if(!lockMovement)
         {
+            //transform.eulerAngles = new Vector3(0, 0, moveVertical * 45);
             GetComponent<Rigidbody>().angularVelocity = -movement * 5;
         }
 
-        transform.eulerAngles = new Vector3(
-            0,
-            // Mathf.Clamp(transform.eulerAngles.y, -tiltAngle, tiltAngle),
-            0,
-            Mathf.Clamp(transform.eulerAngles.z, 90-tiltAngle, 90+tiltAngle)
-        );
+        // transform.eulerAngles = new Vector3(
+        //     0,
+        //     // Mathf.Clamp(transform.eulerAngles.y, -tiltAngle, tiltAngle),
+        //     0,
+        //     Mathf.Clamp(transform.eulerAngles.z, 90-tiltAngle, 90+tiltAngle)
+        // );
     }
 
 
