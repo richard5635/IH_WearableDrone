@@ -5,16 +5,16 @@ using UnityEngine;
 public class SpeedBoost : MonoBehaviour {
 
 	public PlayerMovementPaddle02 playerMovement;
-	int SpeedBooster;
+	public float SpeedBooster = 0.01f;
 	float timer;
-	public float dropTime;
+
+	[Header ("Decceleration")]
+	public float dropTime = 1.0f;
 	public float SpeedDrop = 0.002f;
 
 	// Use this for initialization
 	void Start () {
-		SpeedBooster = 0;
 		StartCoroutine(NaturalSpeedDrop());
-		dropTime = 2.0f;
 	}
 	
 	// Update is called once per frame
@@ -43,7 +43,7 @@ public class SpeedBoost : MonoBehaviour {
         //     if (other.tag == "River")
         //     {
         //         curSpeedUp += 0.01f;
-                playerMovement.UpdateSpeed(0.01f);
+                playerMovement.UpdateSpeed(SpeedBooster);
         //     }
         // }
 		yield return null;
