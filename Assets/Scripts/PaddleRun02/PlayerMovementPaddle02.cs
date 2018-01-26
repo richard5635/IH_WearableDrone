@@ -26,11 +26,14 @@ public class PlayerMovementPaddle02 : MonoBehaviour
     public Text forwardSpeedText;
     public float maxSpeed = 2.0f;
 
-    [Header("ShootingParameter")]
+    [Header("Others")]
+    public GameObject splashPrefab;
 
-    public float fireRate;
-    private float nextFire;
     public bool lockMovement = false;
+
+    [Header("Water Splash")]
+    public GameObject paddleEnd;
+    public GameObject waterEffect;
 
     // Use this for initialization
     void Awake()
@@ -52,21 +55,21 @@ public class PlayerMovementPaddle02 : MonoBehaviour
     {
         transform.parent.position += new Vector3(0, 0, forwardSpeed);
         gameController.AddScore((int)forwardSpeed);
-        
+
     }
 
-    
+
 
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        
+
 
         Vector3 movement = new Vector3(moveVertical * -1, -moveHorizontal * 0.5f, moveHorizontal);
 
-        if(!lockMovement)
+        if (!lockMovement)
         {
             //transform.eulerAngles = new Vector3(0, 0, moveVertical * 45);
             GetComponent<Rigidbody>().angularVelocity = -movement * 5;
@@ -99,15 +102,15 @@ public class PlayerMovementPaddle02 : MonoBehaviour
         }
         else
         {
-			ExtraSpeed += extraSpeedDif;
+            ExtraSpeed += extraSpeedDif;
         }
-        
+
         forwardSpeed = initSpeed + ExtraSpeed;
 
-        if(forwardSpeed > maxSpeed)
+        if (forwardSpeed > maxSpeed)
         {
             forwardSpeed = maxSpeed;
-            ExtraSpeed = forwardSpeed-initSpeed;
+            ExtraSpeed = forwardSpeed - initSpeed;
         }
 
         SpeedSlider.value = forwardSpeed;
@@ -121,16 +124,34 @@ public class PlayerMovementPaddle02 : MonoBehaviour
             //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
             UpdateSpeed(0.02f);
             speedBoost.SpeedDrop += 0.001f;
+            Instantiate(waterEffect,paddleEnd.transform.position,Quaternion.identity);
+            waterEffect.transform.SetParent(paddleEnd.transform);
+            waterEffect.GetComponent<AudioSource>().Play();
+
         }
 
     }
+
+    // void OnCollisionEnter(Collision collision)
+    // {
+        // ContactPoint contact = collision.contacts[0];
+        //     Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        //     Vector3 pos = contact.point;
+        //     Debug.Log("collided with water!");
+        //     GetComponent<AudioSource>().Play();
+        //     Instantiate(splashPrefab, pos, rot);
+		// if (collision.gameObject.name == "River")
+        // {
+            
+        // }
+    // }
 
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "River")
         {
             //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
-            speedBoost.SpeedDrop -= 0.001f;
+            //speedBoost.SpeedDrop -= 0.001f;
         }
     }
 
