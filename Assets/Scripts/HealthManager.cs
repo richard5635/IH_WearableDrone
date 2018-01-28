@@ -50,37 +50,40 @@ namespace PaddleRun
 
         void OnTriggerEnter(Collider other)
         {
-            float collDis;
-            float collForce;
+            // float collDis;
+            // float collForce;
 
-            //This script will handle collissions with monsters and hazards
-            if (!Invincible)
-            {
-                if (other.gameObject.tag == "Enemy")
-                {
-                    HPAdjustment(-1);
-                    Debug.Log("got hit!");
-                    //playerMovement.StartCoroutine("SelfBalance");
-                    StartCoroutine(StunRecovery());
-                    playerMovement.UpdateSpeed(-colSpdDrop);
-                    gameObject.GetComponent<Rigidbody>().AddExplosionForce(2.0f, other.gameObject.transform.position, 5.0f, 0.0f, ForceMode.Impulse);
-                    collDis = transform.position.x - other.gameObject.transform.position.x;
+            // //This script will handle collissions with monsters and hazards
+            // if (!Invincible)
+            // {
+            //     if (other.gameObject.tag == "Enemy")
+            //     {
+            //         HPAdjustment(-1);
+            //         Debug.Log("got hit!");
+            //         //playerMovement.StartCoroutine("SelfBalance");
+            //         StartCoroutine(StunRecovery());
+            //         playerMovement.UpdateSpeed(-colSpdDrop);
+            //         gameObject.GetComponent<Rigidbody>().AddExplosionForce(2.0f, other.gameObject.transform.position, 5.0f, 0.0f, ForceMode.Impulse);
+            //         collDis = transform.position.x - other.gameObject.transform.position.x;
                     
-                    //Arduino Part
-                    //collForce = Mathf.Abs(other.GetComponent<Rigidbody>().mass * other.GetComponent<Rigidbody>().velocity.z);
-                    //arduinoCom.PhysicalCollision(collDis,collForce);
-                }
-                if (other.gameObject.tag == "Monster")
-                {
+            //         //Arduino Part
+            //         //collForce = Mathf.Abs(other.GetComponent<Rigidbody>().mass * other.GetComponent<Rigidbody>().velocity.z);
+            //         //arduinoCom.PhysicalCollision(collDis,collForce);
+            //     }
+            //     if (other.gameObject.tag == "Monster")
+            //     {
 
-                }
-            }
+            //     }
+            // }
         }
 
+
+        //If the obstacles have IsTrigger ticked
         void OnCollisionEnter(Collision collision)
         {
             if (!Invincible)
             {
+                ContactPoint contact = collision.contacts[0];
                 if (collision.gameObject.tag == "Enemy")
                 {
                     HPAdjustment(-1);
@@ -88,6 +91,7 @@ namespace PaddleRun
                     //playerMovement.StartCoroutine("SelfBalance");
                     StartCoroutine(StunRecovery());
                     playerMovement.UpdateSpeed(-colSpdDrop);
+                    gameObject.GetComponent<Rigidbody>().AddExplosionForce(10.0f, contact.point, 5.0f, 0.0f, ForceMode.Impulse);
                     
                     //Arduino Part
                     //collForce = Mathf.Abs(other.GetComponent<Rigidbody>().mass * other.GetComponent<Rigidbody>().velocity.z);
@@ -128,11 +132,13 @@ namespace PaddleRun
         IEnumerator StunRecovery()
         {
             Invincible = true;
+            Physics.IgnoreLayerCollision(8,10,true);
             paddleEnd01.GetComponent<Renderer>().material.color = Color.red;
             paddleEnd02.GetComponent<Renderer>().material.color = Color.red;
             yield return new WaitForSeconds(stunRecoveryTime);
 
             Invincible = false;
+            Physics.IgnoreLayerCollision(8,10,false);
             paddleEnd01.GetComponent<Renderer>().material.color = defaultColor;
             paddleEnd02.GetComponent<Renderer>().material.color = defaultColor;
             yield break;
