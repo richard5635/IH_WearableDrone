@@ -79,9 +79,24 @@ namespace PaddleRun
 
         void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag == "Enemy")
+            if (!Invincible)
             {
+                if (collision.gameObject.tag == "Enemy")
+                {
+                    HPAdjustment(-1);
+                    Debug.Log("got hit!");
+                    //playerMovement.StartCoroutine("SelfBalance");
+                    StartCoroutine(StunRecovery());
+                    playerMovement.UpdateSpeed(-colSpdDrop);
+                    
+                    //Arduino Part
+                    //collForce = Mathf.Abs(other.GetComponent<Rigidbody>().mass * other.GetComponent<Rigidbody>().velocity.z);
+                    //arduinoCom.PhysicalCollision(collDis,collForce);
+                }
+                if (collision.gameObject.tag == "Monster")
+                {
 
+                }
             }
         }
 
