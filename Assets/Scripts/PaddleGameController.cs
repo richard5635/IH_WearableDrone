@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace PaddleRun
 {
-    
+
     public class PaddleGameController : MonoBehaviour
     {
-        [Header("Paddle Game Controller")]
+        [Header("Game Controller")]
 
         private bool MonsterCalled;
         public GameObject monster;
@@ -20,11 +21,18 @@ namespace PaddleRun
         public float startWait;
         public float waveWait;
 
+        [Header("GameScript")]
+        public PlayerMovementPaddle02 playerMovementScript;
+
+        [Header("UI Elements")]
+        public GameObject warningBoard;
+        public Button playAgain;
         public Text scoreText;
         public Text restartText;
         public Text gameOverText;
         public Text timerText;
         public Text warningText;
+        public Text countdownText;
 
         [Header("Timer")]
         public int gameTime;
@@ -46,33 +54,40 @@ namespace PaddleRun
             restart = false;
             MonsterCalled = false;
             restartText.text = "";
+            warningBoard.SetActive(false);
+            playAgain.gameObject.SetActive(false);
             gameOverText.text = "";
             warningText.text = "";
             score = 0;
+            playerMovementScript.lockMovement = true;
 
             UpdateScore();
-            StartCoroutine(Timer());
+            StartCoroutine(Countdown());
             //StartCoroutine(SpawnWaves());
         }
 
         void Update()
         {
+            if (!playerMovementScript.lockMovement)
+            {
+                if (Input.GetKeyUp("m"))
+                {
+                    if (!MonsterCalled)
+                    {
+                        StartCoroutine(spawnMonster());
+                        MonsterCalled = true;
+                    }
+                }
+            }
             if (restart)
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
-                    Application.LoadLevel(Application.loadedLevel);
+                    Restart();
                 }
             }
 
-            if(Input.GetKeyUp("m"))
-            {
-                if(!MonsterCalled)
-                {
-                    StartCoroutine(spawnMonster());
-                    MonsterCalled = true;
-                }
-            }
+
 
 
         }
@@ -84,11 +99,15 @@ namespace PaddleRun
 
         IEnumerator Timer()
         {
-            while(gameTime > 0)
+            while (gameTime > 0)
             {
                 timerText.text = gameTime.ToString("0");
                 yield return new WaitForSeconds(1.0f);
-                gameTime --;
+                gameTime--;
+            }
+            if(gameTime ==0)
+            {
+                GameOver();
             }
         }
         IEnumerator CoSpawnWaves(GameObject waveBox)
@@ -128,19 +147,25 @@ namespace PaddleRun
 
         void UpdateScore()
         {
-            scoreText.text = "SCORE: " + score;
+            scoreText.text = "SCORE: \n" + score;
         }
 
         public void GameOver()
         {
+            warningBoard.SetActive(true);
             gameOverText.text = "Game Over!";
             gameOver = true;
+            playerMovementScript.lockMovement = true;
+            playAgain.gameObject.SetActive(true);
         }
 
-        IEnumerator spawnMonster(){
+        IEnumerator spawnMonster()
+        {
+            warningBoard.SetActive(true);
             warningText.text = "WARNING!\nMONSTER APPROACHING";
             yield return new WaitForSeconds(2.5f);
             warningText.text = "";
+            warningBoard.SetActive(false);
             yield return new WaitForSeconds(0.5f);
             monster.SetActive(true);
             yield return new WaitForSeconds(20.0f);
@@ -148,6 +173,30 @@ namespace PaddleRun
             MonsterCalled = false;
             yield break;
         }
+
+        IEnumerator Countdown()
+        {
+            for (int i = 3; i > 0; i--)
+            {
+                countdownText.text = i.ToString();
+                yield return new WaitForSeconds(1);
+            }
+            countdownText.text = "START!";
+            yield return new WaitForSeconds(1);
+            countdownText.gameObject.SetActive(false);
+            playerMovementScript.lockMovement = false;
+            StartCoroutine(Timer());
+            yield return null;
+        }
+
+        public void Restart(){
+            SceneManager.LoadScene("PaddleRun2");
+        }
+
+        //Show Screen
+        //Finish Countdown
+        
+
     }
 
 }

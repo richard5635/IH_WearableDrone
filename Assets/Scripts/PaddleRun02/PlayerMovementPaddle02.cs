@@ -122,11 +122,9 @@ public class PlayerMovementPaddle02 : MonoBehaviour
         if (other.tag == "River")
         {
             //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
-            UpdateSpeed(0.02f);
-            speedBoost.SpeedDrop += 0.001f;
-            Instantiate(waterEffect,paddleEnd.transform.position,Quaternion.identity);
-            waterEffect.transform.SetParent(paddleEnd.transform);
-            waterEffect.GetComponent<AudioSource>().Play();
+            UpdateSpeed(0.012f);
+            speedBoost.SpeedDrop = 0.005f;
+            if(GetComponent<AudioSource>().isPlaying == false)GetComponent<AudioSource>().Play();
 
         }
 
@@ -134,16 +132,16 @@ public class PlayerMovementPaddle02 : MonoBehaviour
 
     // void OnCollisionEnter(Collision collision)
     // {
-        // ContactPoint contact = collision.contacts[0];
-        //     Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        //     Vector3 pos = contact.point;
-        //     Debug.Log("collided with water!");
-        //     GetComponent<AudioSource>().Play();
-        //     Instantiate(splashPrefab, pos, rot);
-		// if (collision.gameObject.name == "River")
-        // {
-            
-        // }
+        
+	// 	if (collision.gameObject.name == "RiverSurface")
+    //     {
+    //         ContactPoint contact = collision.contacts[0];
+    //         Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+    //         Vector3 pos = contact.point;
+    //         Debug.Log("collided with water!");
+    //         GetComponent<AudioSource>().Play();
+    //         Instantiate(splashPrefab, pos, rot);
+    //     }
     // }
 
     void OnTriggerExit(Collider other)

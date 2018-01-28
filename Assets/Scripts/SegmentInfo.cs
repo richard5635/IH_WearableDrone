@@ -11,13 +11,13 @@ public class SegmentInfo : MonoBehaviour {
 	void OnCollisionEnter(Collision collision)
 	{
 		StartCoroutine(CollisionColorChange());
-		if(collision.gameObject.tag == "Enemy"){
-			drone.GetComponent<HealthManager>().hitPoints--;
-			Debug.Log("got hit!");
-		}
-		if(drone.GetComponent<HealthManager>().hitPoints == 0){
-			Destroy(transform.parent.gameObject);
-		}
+		// if(collision.gameObject.tag == "Enemy"){
+		// 	drone.GetComponent<HealthManager>().hitPoints--;
+		// 	Debug.Log("got hit!");
+		// }
+		// if(drone.GetComponent<HealthManager>().hitPoints == 0){
+		// 	Destroy(transform.parent.gameObject);
+		// }
 	}
 	void Awake()
 	{
