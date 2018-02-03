@@ -9,10 +9,10 @@ public class LEDController : MonoBehaviour {
 	void Update()
     {
         if ( Input.GetKeyDown(KeyCode.A) ) {
-            serialHandler.Write("0");
+            serialHandler.Write("l");
         }
         if ( Input.GetKeyDown(KeyCode.S) ) {
-            serialHandler.Write("1");
+            serialHandler.Write("r");
         }
     }
 }

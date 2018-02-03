@@ -100,13 +100,14 @@ namespace PaddleRun
                     if(collidedPart == "EndLeft")
                     {
                         //LeftPaddle Collision
-                        //serialHandler.Write("l");
+                        Debug.Log("Left collided with rock");
+                        serialHandler.Write("l");
                     }
                     else if(collidedPart == "EndRight")
                     {
                         //RightPaddle Collision
-                        //LeftPaddle Collision
-                        //serialHandler.Write("r");
+                        Debug.Log("Right collided with rock");
+                        serialHandler.Write("r");
                     }
                     //collForce = Mathf.Abs(other.GetComponent<Rigidbody>().mass * other.GetComponent<Rigidbody>().velocity.z);
                     //arduinoCom.PhysicalCollision(collDis,collForce);

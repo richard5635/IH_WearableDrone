@@ -13,7 +13,7 @@ namespace PaddleRun
 
         private bool MonsterCalled;
         public GameObject monster;
-        public GameObject player;
+        public GameObject Paddle;
         public GameObject[] hazards;
         public Vector3 spawnValues;
         public int hazardCount;
@@ -66,7 +66,9 @@ namespace PaddleRun
             
             Timer_ = Timer();
             Countdown_ = Countdown();
-            
+
+            StartGame();
+
             //StartCoroutine(SpawnWaves());
         }
 
@@ -165,6 +167,7 @@ namespace PaddleRun
             gameOver = true;
             playerMovementScript.lockMovement = true;
             playAgain.gameObject.SetActive(true);
+            //Paddle.GetComponent<SteamVR_TrackedObject>().SetActive(false);
         }
 
         IEnumerator spawnMonster()

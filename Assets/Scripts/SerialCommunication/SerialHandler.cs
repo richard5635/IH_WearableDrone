@@ -11,7 +11,7 @@ public class SerialHandler : MonoBehaviour
 
 	public delegate void SerialDataOnClosedEventHandler(SerialHandler h);
 	public event SerialDataOnClosedEventHandler OnClosed;
-	public string portName = "";
+	private string portName ="\\\\.\\COM24";
 	public int baudRate    = 9600;
 
 	private SerialPort serialPort_;
