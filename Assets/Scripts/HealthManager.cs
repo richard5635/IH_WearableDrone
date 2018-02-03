@@ -23,6 +23,8 @@ namespace PaddleRun
         public bool Invincible;
 
         public GameObject rower;
+        [Header("Serial Communication")]
+        [SerializeField] private SerialHandler serialHandler;
 
 
 
@@ -81,6 +83,7 @@ namespace PaddleRun
         //If the obstacles have IsTrigger ticked
         void OnCollisionEnter(Collision collision)
         {
+            string collidedPart = collision.contacts[0].thisCollider.name;
             if (!Invincible)
             {
                 ContactPoint contact = collision.contacts[0];
@@ -92,8 +95,19 @@ namespace PaddleRun
                     StartCoroutine(StunRecovery());
                     playerMovement.UpdateSpeed(-colSpdDrop);
                     gameObject.GetComponent<Rigidbody>().AddExplosionForce(10.0f, contact.point, 5.0f, 0.0f, ForceMode.Impulse);
-                    
+                    Debug.Log("The collision occurred at :" + collidedPart);
                     //Arduino Part
+                    if(collidedPart == "EndLeft")
+                    {
+                        //LeftPaddle Collision
+                        //serialHandler.Write("l");
+                    }
+                    else if(collidedPart == "EndRight")
+                    {
+                        //RightPaddle Collision
+                        //LeftPaddle Collision
+                        //serialHandler.Write("r");
+                    }
                     //collForce = Mathf.Abs(other.GetComponent<Rigidbody>().mass * other.GetComponent<Rigidbody>().velocity.z);
                     //arduinoCom.PhysicalCollision(collDis,collForce);
                 }

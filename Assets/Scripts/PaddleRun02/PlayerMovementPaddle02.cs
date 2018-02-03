@@ -67,7 +67,7 @@ public class PlayerMovementPaddle02 : MonoBehaviour
 
 
 
-        Vector3 movement = new Vector3(moveVertical * -1, -moveHorizontal * 0.5f, moveHorizontal);
+        Vector3 movement = new Vector3(moveVertical * -1, 0, moveHorizontal);
 
         if (!lockMovement)
         {
@@ -125,6 +125,14 @@ public class PlayerMovementPaddle02 : MonoBehaviour
             UpdateSpeed(0.012f);
             speedBoost.SpeedDrop = 0.005f;
             if(GetComponent<AudioSource>().isPlaying == false)GetComponent<AudioSource>().Play();
+            
+            // RaycastHit hit;
+            // if(Physics.Raycast(transform.position, transform.forward, out hit))
+            // {
+            //     Debug.Log("Point of contact:" + hit.point);
+            //     Instantiate(splashPrefab,hit.point,Quaternion.identity);
+            // }
+
 
         }
 

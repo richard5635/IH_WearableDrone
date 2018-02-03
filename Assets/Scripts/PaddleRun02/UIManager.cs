@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
 	// Use this for initialization
 	public void PaddleRun()
 	{
+		GameObject go;
 		SceneManager.LoadScene("PaddleRun2");
 	}
 }

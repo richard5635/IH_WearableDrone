@@ -41,6 +41,8 @@ namespace PaddleRun
         private bool gameOver;
         private bool restart;
         private int score;
+        private IEnumerator Timer_;
+        private IEnumerator Countdown_;
         //private bool Invincible;
 
         void Awake()
@@ -60,10 +62,17 @@ namespace PaddleRun
             warningText.text = "";
             score = 0;
             playerMovementScript.lockMovement = true;
-
             UpdateScore();
-            StartCoroutine(Countdown());
+            
+            Timer_ = Timer();
+            Countdown_ = Countdown();
+            
             //StartCoroutine(SpawnWaves());
+        }
+
+        public void StartGame() {
+            StartCoroutine(Timer_);
+            StartCoroutine(Countdown_);
         }
 
         void Update()
@@ -143,8 +152,6 @@ namespace PaddleRun
             UpdateScore();
         }
 
-
-
         void UpdateScore()
         {
             scoreText.text = "SCORE: \n" + score;
@@ -152,6 +159,7 @@ namespace PaddleRun
 
         public void GameOver()
         {
+            StopCoroutine(Timer_);
             warningBoard.SetActive(true);
             gameOverText.text = "Game Over!";
             gameOver = true;
@@ -176,6 +184,7 @@ namespace PaddleRun
 
         IEnumerator Countdown()
         {
+            countdownText.gameObject.SetActive(true);
             for (int i = 3; i > 0; i--)
             {
                 countdownText.text = i.ToString();
