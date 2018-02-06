@@ -116,13 +116,19 @@ public class PlayerMovementPaddle02 : MonoBehaviour
         forwardSpeedText.text = "SPEED: " + initSpeed.ToString("0.0") + " + " + ExtraSpeed.ToString("0.0");
     }
 
+    void AddForce(float forceValue)
+    {
+        Player.GetComponent<Rigidbody>().AddForce(0,0,forceValue);
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "River")
         {
             //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
-            UpdateSpeed(0.012f);
-            speedBoost.SpeedDrop = 0.005f;
+            //UpdateSpeed(0.012f);
+            AddForce(8.0f);
+            Player.GetComponent<Rigidbody>().drag = 0.2f;
             
             
             // RaycastHit hit;
@@ -157,6 +163,7 @@ public class PlayerMovementPaddle02 : MonoBehaviour
         {
             //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
             //speedBoost.SpeedDrop -= 0.001f;
+            Player.GetComponent<Rigidbody>().drag = 0.1f;
         }
     }
 
