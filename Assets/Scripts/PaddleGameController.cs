@@ -79,7 +79,7 @@ namespace PaddleRun
         }
 
         public void StartGame() {
-            StartCoroutine(Timer_);
+            
             StartCoroutine(Countdown_);
         }
 
@@ -120,9 +120,9 @@ namespace PaddleRun
             {
                 timerText.text = gameTime.ToString("0");
                 yield return new WaitForSeconds(1.0f);
-                gameTime--;
+                gameTime -= 1;
             }
-            if(gameTime ==0)
+            if(gameTime == 0)
             {
                 GameOver();
             }
@@ -203,7 +203,7 @@ namespace PaddleRun
             yield return new WaitForSeconds(1);
             countdownText.gameObject.SetActive(false);
             playerMovementScript.lockMovement = false;
-            StartCoroutine(Timer());
+            StartCoroutine(Timer_);
             yield return null;
         }
 

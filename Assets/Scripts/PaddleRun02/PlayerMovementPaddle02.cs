@@ -6,6 +6,8 @@ using PaddleRun;
 
 public class PlayerMovementPaddle02 : MonoBehaviour
 {
+    [Header("Game Objects")]
+    public GameObject Player;
     public PaddleGameController gameController;
     [Header("Movement")]
     public float forwardSpeed;
@@ -53,9 +55,8 @@ public class PlayerMovementPaddle02 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.parent.position += new Vector3(0, 0, forwardSpeed);
+        Player.transform.position += new Vector3(0, 0, forwardSpeed);
         gameController.AddScore((int)forwardSpeed);
-
     }
 
 
@@ -64,8 +65,6 @@ public class PlayerMovementPaddle02 : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-
-
 
         Vector3 movement = new Vector3(moveVertical * -1, 0, moveHorizontal);
 
