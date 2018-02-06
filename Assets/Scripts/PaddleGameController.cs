@@ -9,7 +9,13 @@ namespace PaddleRun
 
     public class PaddleGameController : MonoBehaviour
     {
+        
+        
         [Header("Game Controller")]
+        public bool KeyboardControl;
+        public bool ViveControl;
+
+        [Header ("Game Objects")]
 
         private bool MonsterCalled;
         public GameObject monster;
