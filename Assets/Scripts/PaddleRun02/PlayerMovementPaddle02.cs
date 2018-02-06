@@ -124,7 +124,7 @@ public class PlayerMovementPaddle02 : MonoBehaviour
             //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
             UpdateSpeed(0.012f);
             speedBoost.SpeedDrop = 0.005f;
-            if(GetComponent<AudioSource>().isPlaying == false)GetComponent<AudioSource>().Play();
+            
             
             // RaycastHit hit;
             // if(Physics.Raycast(transform.position, transform.forward, out hit))
