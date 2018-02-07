@@ -13,15 +13,15 @@ public class ChaseTarget : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        diff = target.transform.position - transform.position;
-        followSpeed = playerMovement.forwardSpeed;
+        //diff = target.transform.position - transform.position;
+        //followSpeed = target.GetComponent<Rigidbody>().velocity.z;
     }
 
     void OnEnable()
     {
         transform.position = new Vector3(0, 0, target.transform.position.z - 5.0f);
         diff = target.transform.position - transform.position;
-        followSpeed = playerMovement.forwardSpeed + 0.2f;
+        followSpeed = target.GetComponent<Rigidbody>().velocity.z / 20;
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class ChaseTarget : MonoBehaviour
                     transform.position.x,
                     Mathf.Lerp(
                         transform.position.y,
-                        target.transform.position.y,
+                        target.transform.position.y + 1,
                         Time.deltaTime * followSpeed * 15),
                     transform.position.z + 1 * followSpeed * 20 * Time.deltaTime);
             }

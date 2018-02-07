@@ -26,7 +26,7 @@ public class PlayerMovementPaddle02 : MonoBehaviour
     //Speed Related
     public float ExtraSpeed;
     public Text forwardSpeedText;
-    public float maxSpeed = 2.0f;
+    private float maxSpeed = 25.0f;
 
     [Header("Others")]
     public GameObject splashPrefab;
@@ -47,9 +47,8 @@ public class PlayerMovementPaddle02 : MonoBehaviour
 
     void Start()
     {
-        UpdateSpeed(0.0f);
+        StartCoroutine(UpdateUI());
         SpeedSlider.maxValue = maxSpeed;
-        SpeedSlider.value = forwardSpeed;
     }
 
     // Update is called once per frame
@@ -119,6 +118,10 @@ public class PlayerMovementPaddle02 : MonoBehaviour
     void AddForce(float forceValue)
     {
         Player.GetComponent<Rigidbody>().AddForce(0,0,forceValue);
+
+        //Velocity Min : 1.00, Max : 10:00
+
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -165,6 +168,13 @@ public class PlayerMovementPaddle02 : MonoBehaviour
             //speedBoost.SpeedDrop -= 0.001f;
             Player.GetComponent<Rigidbody>().drag = 0.1f;
         }
+    }
+
+    IEnumerator UpdateUI()
+    {
+        SpeedSlider.value = Player.GetComponent<Rigidbody>().velocity.magnitude;
+        yield return new WaitForSeconds(0.4f);
+        yield return UpdateUI();
     }
 
 }

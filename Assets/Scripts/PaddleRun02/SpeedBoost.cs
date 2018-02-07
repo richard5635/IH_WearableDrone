@@ -14,7 +14,7 @@ public class SpeedBoost : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(NaturalSpeedDrop());
+		//StartCoroutine(NaturalSpeedDrop());
 	}
 	
 	// Update is called once per frame

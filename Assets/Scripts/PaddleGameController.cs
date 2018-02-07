@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace PaddleRun
 {
@@ -18,10 +19,11 @@ namespace PaddleRun
         [Header ("Game Objects")]
 
         private bool MonsterCalled;
+        public GameObject Player;
         public GameObject monster;
         public GameObject Paddle;
-        public GameObject[] hazards;
         public Vector3 spawnValues;
+        public GameObject[] hazards;
         public int hazardCount;
         public float spawnWait;
         public float startWait;
@@ -37,7 +39,8 @@ namespace PaddleRun
         public Text restartText;
         public Text gameOverText;
         public Text timerText;
-        public Text warningText;
+        public GameObject warningText;
+        //public TextMeshProUGUI warningText;
         public Text countdownText;
 
         [Header("Timer")]
@@ -64,8 +67,7 @@ namespace PaddleRun
             restartText.text = "";
             warningBoard.SetActive(false);
             playAgain.gameObject.SetActive(false);
-            gameOverText.text = "";
-            warningText.text = "";
+            gameOverText.gameObject.SetActive(false);
             score = 0;
             playerMovementScript.lockMovement = true;
             UpdateScore();
@@ -121,9 +123,17 @@ namespace PaddleRun
                 timerText.text = gameTime.ToString("0");
                 yield return new WaitForSeconds(1.0f);
                 gameTime -= 1;
+                if(gameTime <= 3)
+                {
+                    countdownText.gameObject.SetActive(true);
+                    countdownText.text = gameTime.ToString("0");
+                    countdownText.GetComponent<AudioSource>().Play();
+                }
             }
             if(gameTime == 0)
             {
+                timerText.text = gameTime.ToString("0");
+                countdownText.text = "FINISH!!";
                 GameOver();
             }
         }
@@ -156,7 +166,7 @@ namespace PaddleRun
 
         public void AddScore(int newScoreValue)
         {
-            score += newScoreValue;
+            score = (int)Player.transform.position.z;
             UpdateScore();
         }
 
@@ -169,7 +179,7 @@ namespace PaddleRun
         {
             StopCoroutine(Timer_);
             warningBoard.SetActive(true);
-            gameOverText.text = "Game Over!";
+            gameOverText.gameObject.SetActive(true);
             gameOver = true;
             playerMovementScript.lockMovement = true;
             playAgain.gameObject.SetActive(true);
@@ -178,10 +188,11 @@ namespace PaddleRun
 
         IEnumerator spawnMonster()
         {
+            
             warningBoard.SetActive(true);
-            warningText.text = "WARNING!\nMONSTER APPROACHING";
+            warningText.SetActive(true);
             yield return new WaitForSeconds(2.5f);
-            warningText.text = "";
+            warningText.SetActive(false);
             warningBoard.SetActive(false);
             yield return new WaitForSeconds(0.5f);
             monster.SetActive(true);
@@ -197,6 +208,7 @@ namespace PaddleRun
             for (int i = 3; i > 0; i--)
             {
                 countdownText.text = i.ToString();
+                countdownText.GetComponent<AudioSource>().Play();
                 yield return new WaitForSeconds(1);
             }
             countdownText.text = "START!";

@@ -10,7 +10,9 @@ namespace PaddleRun
     public class HealthManager : MonoBehaviour
     {
         public int hitPoints = 3;
+        [Header("UI")]
         private Slider playerHPSlider;
+        public GameObject HPAlert;
         private PaddleGameController gameController;
         public float colSpdDrop = 0.4f;
         public GameObject playerExplosion;
@@ -130,9 +132,16 @@ namespace PaddleRun
             hitPoints += HPChange;
             Debug.Log("HP Changed by: " + HPChange);
             playerHPSlider.value = hitPoints;
+            
+            if(playerHPSlider.value / playerHPSlider.maxValue < 0.9f)
+            {
+                playerHPSlider.fillRect.transform.GetComponent<Image>().color = Color.red;
+                HPAlert.SetActive(true);
+            }
             if (hitPoints == 0)
             {
                 PlayerDies();
+                HPAlert.SetActive(false);
             }
         }
 
