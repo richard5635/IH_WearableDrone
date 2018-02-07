@@ -37,7 +37,7 @@ namespace PaddleRun
         public Button playAgain;
         public Text scoreText;
         public Text restartText;
-        public Text gameOverText;
+        public TextMeshProUGUI gameOverText;
         public Text timerText;
         public GameObject warningText;
         //public TextMeshProUGUI warningText;

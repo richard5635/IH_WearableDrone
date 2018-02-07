@@ -133,7 +133,7 @@ namespace PaddleRun
             Debug.Log("HP Changed by: " + HPChange);
             playerHPSlider.value = hitPoints;
             
-            if(playerHPSlider.value / playerHPSlider.maxValue < 0.9f)
+            if(playerHPSlider.value / playerHPSlider.maxValue < 0.25f)
             {
                 playerHPSlider.fillRect.transform.GetComponent<Image>().color = Color.red;
                 HPAlert.SetActive(true);
