@@ -5,9 +5,11 @@ using UnityEngine;
 public class StickBehavior : MonoBehaviour {
 	public float mFactor = 2.0f;
 	private float maxLength = 50.0f;
-	private float minLength = 1.0f;
+	private float minLength = 2.0f;
 	Vector3 lTemp;
 	// Use this for initialization
+
+	public BarbellWeightModifier weightModifier;
 	void Start () {
 		lTemp = transform.localScale;
 	}

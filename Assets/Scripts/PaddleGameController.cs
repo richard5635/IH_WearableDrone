@@ -133,7 +133,7 @@ namespace PaddleRun
             if(gameTime == 0)
             {
                 timerText.text = gameTime.ToString("0");
-                countdownText.text = "FINISH!!";
+                countdownText.text = "";
                 GameOver();
             }
         }
