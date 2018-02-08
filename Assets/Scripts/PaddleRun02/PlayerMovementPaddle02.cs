@@ -55,7 +55,7 @@ public class PlayerMovementPaddle02 : MonoBehaviour
     void Update()
     {
         Player.transform.position += new Vector3(0, 0, forwardSpeed);
-        gameController.AddScore((int)forwardSpeed);
+        
     }
 
 

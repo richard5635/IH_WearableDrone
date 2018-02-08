@@ -83,6 +83,7 @@ namespace PaddleRun
         public void StartGame() {
             
             StartCoroutine(Countdown_);
+            Paddle.GetComponent<SteamVR_TrackedObject>().enabled = true;
         }
 
         void Update()
@@ -105,7 +106,7 @@ namespace PaddleRun
                     Restart();
                 }
             }
-
+            if(!gameOver) AddScore();
 
 
 
@@ -164,7 +165,7 @@ namespace PaddleRun
             }
         }
 
-        public void AddScore(int newScoreValue)
+        public void AddScore()
         {
             score = (int)Player.transform.position.z;
             UpdateScore();
@@ -178,6 +179,7 @@ namespace PaddleRun
         public void GameOver()
         {
             StopCoroutine(Timer_);
+            Paddle.GetComponent<SteamVR_TrackedObject>().enabled = false;
             warningBoard.SetActive(true);
             gameOverText.gameObject.SetActive(true);
             gameOver = true;

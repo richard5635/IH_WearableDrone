@@ -29,7 +29,7 @@ public class DestroyByContact : MonoBehaviour {
             return;
         }
 		Instantiate(explosion, transform.position, transform.rotation);
-        gameController.AddScore (scoreValue);
+        gameController.AddScore ();
         if(other.tag != "Player"){
             //Destroy(other.gameObject);
         }
