@@ -31,6 +31,7 @@ namespace PaddleRun
 
         [Header("GameScript")]
         public PlayerMovementPaddle02 playerMovementScript;
+        public SerialHandler serialHandler;
 
         [Header("UI Elements")]
         public GameObject warningBoard;
@@ -42,6 +43,7 @@ namespace PaddleRun
         public GameObject warningText;
         //public TextMeshProUGUI warningText;
         public Text countdownText;
+        public GameObject FinalScore;
 
         [Header("Timer")]
         public int gameTime;
@@ -84,6 +86,7 @@ namespace PaddleRun
             
             StartCoroutine(Countdown_);
             Paddle.GetComponent<SteamVR_TrackedObject>().enabled = true;
+            serialHandler.Write("s");
         }
 
         void Update()
@@ -185,7 +188,9 @@ namespace PaddleRun
             gameOver = true;
             playerMovementScript.lockMovement = true;
             playAgain.gameObject.SetActive(true);
+            FinalScore.SetActive(true);
             //Paddle.GetComponent<SteamVR_TrackedObject>().SetActive(false);
+            serialHandler.Write("s");
         }
 
         IEnumerator spawnMonster()
