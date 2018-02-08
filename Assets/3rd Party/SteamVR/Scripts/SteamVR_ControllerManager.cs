@@ -252,9 +252,8 @@ public class SteamVR_ControllerManager : MonoBehaviour
 			SetTrackedDeviceIndex(objectIndex++, (leftIndex < connected.Length && connected[leftIndex]) ? leftIndex : OpenVR.k_unTrackedDeviceIndexInvalid);
 
 			// Assign out any additional controllers only after both left and right have been assigned.
-			// Richard5635 - Commented out conditional script rightb below
-			// if (leftIndex != OpenVR.k_unTrackedDeviceIndexInvalid && rightIndex != OpenVR.k_unTrackedDeviceIndexInvalid)
-			// {
+			if (leftIndex != OpenVR.k_unTrackedDeviceIndexInvalid && rightIndex != OpenVR.k_unTrackedDeviceIndexInvalid)
+			{
 				for (uint deviceIndex = 0; deviceIndex < connected.Length; deviceIndex++)
 				{
 					if (objectIndex >= objects.Length)
@@ -269,7 +268,7 @@ public class SteamVR_ControllerManager : MonoBehaviour
 					}
 				}
 			}
-		// }
+		}
 
 		// Reset the rest.
 		while (objectIndex < objects.Length)

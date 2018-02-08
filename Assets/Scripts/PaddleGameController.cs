@@ -75,7 +75,7 @@ namespace PaddleRun
             Timer_ = Timer();
             Countdown_ = Countdown();
 
-            StartGame();
+            // StartGame();
 
             //StartCoroutine(SpawnWaves());
         }
