@@ -130,7 +130,7 @@ public class PlayerMovementPaddle02 : MonoBehaviour
         {
             //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
             //UpdateSpeed(0.012f);
-            AddForce(8.0f);
+            AddForce(16.0f);
             Player.GetComponent<Rigidbody>().drag = 0.2f;
             
             

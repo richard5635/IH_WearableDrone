@@ -13,7 +13,7 @@ public class WaterBehavior : MonoBehaviour {
 			Vector3 paddlePos = other.transform.position;
 			Vector3 closestPoint = other.ClosestPointOnBounds(paddlePos);
 			Instantiate(SplashPrefab, closestPoint, Quaternion.identity);
-			//serialHandler.Write("w");
+			serialHandler.Write("w");
 		}
 	}
 }

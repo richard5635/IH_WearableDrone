@@ -77,9 +77,9 @@ namespace PaddleRun
             Timer_ = Timer();
             Countdown_ = Countdown();
 
-            // StartGame();
+            //StartGame();
 
-            //StartCoroutine(SpawnWaves());
+            StartCoroutine(CoSpawnWaves());
         }
 
         public void StartGame() {
@@ -115,9 +115,9 @@ namespace PaddleRun
 
         }
 
-        public void SpawnWaves(GameObject waveBox)
+        public void SpawnWaves()
         {
-            StartCoroutine(CoSpawnWaves(waveBox));
+            StartCoroutine(CoSpawnWaves());
         }
 
         IEnumerator Timer()
@@ -141,7 +141,7 @@ namespace PaddleRun
                 GameOver();
             }
         }
-        IEnumerator CoSpawnWaves(GameObject waveBox)
+        IEnumerator CoSpawnWaves()
         {
             yield return new WaitForSeconds(startWait);
             while (true)
@@ -152,9 +152,9 @@ namespace PaddleRun
                     float[] twoNum = new float[2];
                     twoNum[0] = spawnValues.x;
                     twoNum[1] = -spawnValues.x;
-                    Vector3 spawnPosition = new Vector3(twoNum[Random.Range(0, twoNum.Length)], spawnValues.y, spawnValues.z);
+                    Vector3 spawnPosition = new Vector3(twoNum[Random.Range(0, twoNum.Length)], spawnValues.y, Player.transform.position.z + 16.0f);
                     Quaternion spawnRotation = Quaternion.identity;
-                    Instantiate(hazard, spawnPosition, spawnRotation, waveBox.transform.parent);
+                    Instantiate(hazard, spawnPosition, spawnRotation);
                     yield return new WaitForSeconds(spawnWait);
                 }
                 yield return new WaitForSeconds(waveWait);

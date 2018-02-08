@@ -20,7 +20,7 @@ public class WaveLoop : MonoBehaviour
         }
         if(spawnOn)
         {
-          gameController.SpawnWaves(gameObject);
+          gameController.SpawnWaves();
         }
 
     }
@@ -49,7 +49,7 @@ public class WaveLoop : MonoBehaviour
 
             //move back to initial position;
             spawnOn = true;
-            gameController.SpawnWaves(gameObject);
+            gameController.SpawnWaves();
             transform.parent.position = new Vector3(0,0,500);
         }
     }

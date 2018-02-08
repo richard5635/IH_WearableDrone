@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class WeightSizeControl : MonoBehaviour {
 	public float mFactor = 0.2f;
-	private float maxSize = 6.0f;
-	private float minSize = 4.0f;
+	private float maxSize;
+	private float minSize;
 	Vector3 lTemp;
 
 	// Use this for initialization
 	void Start () {
 		lTemp = transform.localScale;
+		maxSize = transform.localScale.x + 2;
+		minSize = transform.localScale.x;
 	}
 	
 	// Update is called once per frame

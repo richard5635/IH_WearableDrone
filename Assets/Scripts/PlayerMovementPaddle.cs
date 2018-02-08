@@ -110,7 +110,7 @@ namespace PaddleRun
             if (other.tag == "River")
             {
                 //StartCoroutine(speedBoost.PaddleSpeedBoost(other));
-                ExtraSpeed += 0.1f;
+                ExtraSpeed += 0.2f;
                 UpdateSpeed();
             }
 
