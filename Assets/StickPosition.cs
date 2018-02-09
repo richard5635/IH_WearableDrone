@@ -13,10 +13,10 @@ public class StickPosition : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = new Vector3(
+		transform.localPosition = new Vector3(
+			0,
 			Target.transform.localScale.y * (Left ? -1 : 1),
-			transform.position.y,
-			transform.position.z
+			-0.1f
 		);
 	}
 }

@@ -6,6 +6,10 @@ public class WaterBehavior : MonoBehaviour {
 	public GameObject SplashPrefab;
 	public SerialHandler serialHandler;
 
+	void Awake(){
+		serialHandler = GameObject.Find("SerialHandler").GetComponent<SerialHandler>();
+	}
+
 	void OnTriggerEnter(Collider other)
 	{
 		if(other.tag == "Player")

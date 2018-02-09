@@ -10,18 +10,20 @@ namespace PaddleRun
 
     public class PaddleGameController : MonoBehaviour
     {
-        
-        
+
+
         [Header("Game Controller")]
         public bool KeyboardControl;
         public bool ViveControl;
 
-        [Header ("Game Objects")]
+        [Header("Game Objects")]
 
         private bool MonsterCalled;
         public GameObject Player;
         public GameObject monster;
         public GameObject Paddle;
+
+        [Header("Spawn Control")]
         public Vector3 spawnValues;
         public GameObject[] hazards;
         public int hazardCount;
@@ -47,6 +49,7 @@ namespace PaddleRun
 
         [Header("Timer")]
         public int gameTime;
+        private int remainTime;
 
 
         private bool gameOver;
@@ -72,18 +75,20 @@ namespace PaddleRun
             gameOverText.gameObject.SetActive(false);
             score = 0;
             playerMovementScript.lockMovement = true;
+            remainTime = gameTime;
             UpdateScore();
-            
+
             Timer_ = Timer();
             Countdown_ = Countdown();
 
-            //StartGame();
+            StartGame();
 
             StartCoroutine(CoSpawnWaves());
         }
 
-        public void StartGame() {
-            
+        public void StartGame()
+        {
+
             StartCoroutine(Countdown_);
             Paddle.GetComponent<SteamVR_TrackedObject>().enabled = true;
             serialHandler.Write("s");
@@ -109,7 +114,7 @@ namespace PaddleRun
                     Restart();
                 }
             }
-            if(!gameOver) AddScore();
+            if (!gameOver) AddScore();
 
 
 
@@ -122,21 +127,26 @@ namespace PaddleRun
 
         IEnumerator Timer()
         {
-            while (gameTime > 0)
+            //make three times faster : spawn time divided by three
+            //float spawnMultiplier = ExtensionMethods.Remap(remainTime / gameTime, 0, 1, 0.33f, 1);
+            while (remainTime > 0)
             {
-                timerText.text = gameTime.ToString("0");
+                timerText.text = remainTime.ToString("0");
                 yield return new WaitForSeconds(1.0f);
-                gameTime -= 1;
-                if(gameTime <= 3)
+                remainTime -= 1;
+                //Game Behavior Control
+                spawnWait -= 0.024f;
+                waveWait -= 0.024f;
+                if (remainTime <= 3)
                 {
                     countdownText.gameObject.SetActive(true);
-                    countdownText.text = gameTime.ToString("0");
+                    countdownText.text = remainTime.ToString("0");
                     countdownText.GetComponent<AudioSource>().Play();
                 }
             }
-            if(gameTime == 0)
+            if (remainTime == 0)
             {
-                timerText.text = gameTime.ToString("0");
+                timerText.text = remainTime.ToString("0");
                 countdownText.text = "";
                 GameOver();
             }
@@ -152,7 +162,10 @@ namespace PaddleRun
                     float[] twoNum = new float[2];
                     twoNum[0] = spawnValues.x;
                     twoNum[1] = -spawnValues.x;
-                    Vector3 spawnPosition = new Vector3(twoNum[Random.Range(0, twoNum.Length)], spawnValues.y, Player.transform.position.z + 16.0f);
+                    Vector3 spawnPosition = new Vector3(
+                        twoNum[Random.Range(0, twoNum.Length)], 
+                        spawnValues.y, 
+                        Player.transform.position.z + 16.0f + (Player.GetComponent<Rigidbody>().velocity.z * 0.1f) + Random.Range(-2.0f, 2.0f));
                     Quaternion spawnRotation = Quaternion.identity;
                     Instantiate(hazard, spawnPosition, spawnRotation);
                     yield return new WaitForSeconds(spawnWait);
@@ -195,7 +208,7 @@ namespace PaddleRun
 
         IEnumerator spawnMonster()
         {
-            
+
             warningBoard.SetActive(true);
             warningText.SetActive(true);
             yield return new WaitForSeconds(2.5f);
@@ -226,13 +239,24 @@ namespace PaddleRun
             yield return null;
         }
 
-        public void Restart(){
+        public void Restart()
+        {
             SceneManager.LoadScene("PaddleRun2");
         }
 
         //Show Screen
         //Finish Countdown
-        
+
+
+    }
+
+    public static class ExtensionMethods
+    {
+
+        public static float Remap(this float value, float from1, float to1, float from2, float to2)
+        {
+            return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
+        }
 
     }
 

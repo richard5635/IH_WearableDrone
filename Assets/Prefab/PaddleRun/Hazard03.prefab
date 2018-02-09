@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 54795007519892070}
   - component: {fileID: 136329795960564484}
   - component: {fileID: 114774062915188164}
+  - component: {fileID: 114432061325290706}
   m_Layer: 8
   m_Name: Hazard03
   m_TagString: Enemy
@@ -39,7 +40,7 @@ GameObject:
   - component: {fileID: 4363779004355728}
   - component: {fileID: 33418807044875508}
   - component: {fileID: 23141649846150900}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: prop_asteroid_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,6 +130,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114432061325290706
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318367048661732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13810d43f6b778d449117bce13d184cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114774062915188164
 MonoBehaviour:
   m_ObjectHideFlags: 1

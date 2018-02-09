@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 54369474266882586}
   - component: {fileID: 136220631271306686}
   - component: {fileID: 114567613243754106}
+  - component: {fileID: 114625157748282058}
   m_Layer: 8
   m_Name: Hazard01
   m_TagString: Enemy
@@ -39,7 +40,7 @@ GameObject:
   - component: {fileID: 4452641194308180}
   - component: {fileID: 33862135638786066}
   - component: {fileID: 23629890647915208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: prop_asteroid_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,6 +142,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 0
+--- !u!114 &114625157748282058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1374812390158960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13810d43f6b778d449117bce13d184cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136220631271306686
 CapsuleCollider:
   m_ObjectHideFlags: 1
