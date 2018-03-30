@@ -1,4 +1,5 @@
 # IH_WearableDrone
+[This Unity content is made as a part of a project in Inami-Hiyama Laboratory, University of Tokyo]
 
 Source Link
 https://www.evernote.com/l/ADjPoLJql95OaLLm2whEBqrmAvxS5wvwo8s
