@@ -3,6 +3,9 @@
 Source Link
 https://www.evernote.com/l/ADjPoLJql95OaLLm2whEBqrmAvxS5wvwo8s
 
+Video Link
+https://www.youtube.com/watch?v=N1oxUehFfQo&feature=youtu.be
+
 Thank you for trying Leviopole. This page contains a summarized instruction on how to run the software content for demonstration.
 There are some important points to do in order to run this device, so please read this carefully.
 
