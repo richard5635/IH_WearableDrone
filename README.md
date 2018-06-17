@@ -10,16 +10,16 @@ https://www.youtube.com/watch?v=N1oxUehFfQo&feature=youtu.be
 Thank you for trying Leviopole. This page contains a summarized instruction on how to run the software content for demonstration.
 There are some important points to do in order to run this device, so please read this carefully.
 
-##Equipment
+## Equipment
 1. VR-friendly PC running on Windows. For development we used GT62VR 7RE Dominator Pro.
 2. HTC Vive, including two controllers, two Base Stations and one Tracker.
 3. LevioPole
 4. Headphone
 
-##Environment
+## Environment
 1. An open space and platforms where the two base stations can be set to monitor the space.
 
-##Steps
+## Steps
 1. Download or clone the git "IH_WearableDrone” that contains the software.
 https://github.com/richard5635/IH_WearableDrone
 2. This content runs on Unity 2017.02.0f3, so it is best to match it.
@@ -56,7 +56,7 @@ In the end the status must show the devices shown in green.
 11. Now, you should be ready to play, and start the game.
 
 
-##In-Game Steps
+## In-Game Steps
 1. While wearing the HMD, make sure you are located right on top of the canoe, and the tracker is tracking the paddle.
 2. Due to the simple algorithm, as long as the paddle touches the water, the you will receive a pushing force forward. For fun experience, I suggest not to take advantage of this simple algorithm and paddle normally as how you would normally paddle in reality.
 3. If you press M, a monster will spawn after a warning sign, and it will chase you from behind for a fixed time before disappearing again.
